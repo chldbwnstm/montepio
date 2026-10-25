@@ -1,0 +1,18 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  src: ImageMetadata | string;
+  alt: string;
+  ratio: 'portrait' | 'landscape' | 'card';
+  class?: string;
+  sizes?: string;
+}
+const { src, alt, ratio, class: cls = '', sizes = '(min-width: 768px) 50vw, 90vw' } = Astro.props;
+const aspect = { portrait: 'aspect-[3/4]', landscape: 'aspect-[3/2]', card: 'aspect-[6/5]' }[ratio];
+const classes = `${aspect} object-cover ${cls}`;
+---
+{typeof src === 'string'
+  ? <img src={src} alt={alt} loading="lazy" class={classes} />
+  : <Image src={src} alt={alt} widths={[600, 1000, 1600]} sizes={sizes} class={classes} />}

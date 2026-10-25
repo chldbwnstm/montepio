@@ -1,10 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
 import { BOOKING_URL } from '../config/booking';
-// shortcut: plain <img> for SVG placeholders, swap to astro:assets <Image> when real photos arrive
 import portrait from '../assets/photos/portrait.svg?url';
-import landscape from '../assets/photos/landscape.svg?url';
-import roomCard from '../assets/photos/room-card.svg?url';
+// shortcut: pre-renovation photos from the Accor listing (A0C4), confirm usage rights with Accor before public launch and replace after the shoot
+import facade from '../assets/photos/facade.jpg';
+import grounds from '../assets/photos/grounds.jpg';
+import barDining from '../assets/photos/bar-dining.jpg';
+import roomArch from '../assets/photos/room-arch.jpg';
+import roomQueen from '../assets/photos/room-queen.jpg';
+import roomTwin from '../assets/photos/room-twin.jpg';
+import roomSpa from '../assets/photos/room-spa.jpg';
 import ilMorning from '../assets/illustrations/home-morning.svg?url';
 import ilMaitland from '../assets/illustrations/home-maitland.svg?url';
 import ilArt from '../assets/illustrations/home-art.svg?url';
@@ -17,31 +23,36 @@ const chapters = [
   {
     title: 'Morning in the building',
     copy: 'Light finds its way in slowly here. Start with coffee and something warm [breakfast offer: confirm], then take a minute with the walls around you. [Heritage story: confirm with owners]',
-    alt: '[Morning light in the building: to shoot]',
+    land: facade, landAlt: 'The red brick Monte Pio building and front lawn',
+    port: portrait, portAlt: '[Morning coffee: to shoot]',
     il: ilMorning,
   },
   {
     title: 'Wander Maitland',
     copy: 'Step outside and the town is yours. Browse, stop for a long lunch, follow the river for a while. Ask us for the places we keep going back to. [Local favourites and walking times: confirm]',
-    alt: '[Maitland street scene: to shoot]',
+    land: grounds, landAlt: 'Tall pines on the lawn beside the brick buildings',
+    port: portrait, portAlt: '[Maitland street scene: to shoot]',
     il: ilMaitland,
   },
   {
     title: 'An afternoon in',
     copy: 'Every room holds an original work by Cory Hartono, made for this building. Look closely and you may spot the river, the hills, or a bridge you crossed this morning. [Which work hangs in which room: confirm]',
-    alt: '[Room with Cory Hartono artwork in place: to shoot]',
+    land: roomArch, landAlt: 'A guest room with an arched opening and a sitting area',
+    port: roomTwin, portAlt: 'A twin room with an artwork above the beds',
     il: ilArt,
   },
   {
     title: 'Evening at Monte',
     copy: 'Monte is our restaurant. Book a table for dinner, or simply come by for a glass before bed. [Cuisine, hours and bookings: confirm]',
-    alt: '[Monte dining room in service: to shoot]',
+    land: barDining, landAlt: 'The bar lounge opening onto the dining room',
+    port: portrait, portAlt: '[Monte dish: to shoot]',
     il: ilMonte,
   },
   {
     title: 'Goodnight',
     copy: 'Draw the curtains and turn the lights down low. Tomorrow can wait until check-out at [check-out time: confirm].',
-    alt: '[Room at night, lamps on: to shoot]',
+    land: roomSpa, landAlt: 'A suite with a spa bath and lamps lit',
+    port: portrait, portAlt: '[Building at dusk: to shoot]',
     il: ilNight,
   },
 ];
@@ -65,8 +76,8 @@ const chapters = [
             <img src={c.il} alt="" width="600" height="600" loading="lazy" class="mt-10 hidden w-40 md:block" />
           </div>
           <div class="relative md:col-span-8 [direction:ltr]">
-            <img src={landscape} alt={c.alt} width="1200" height="800" loading="lazy" class={`reveal w-full md:w-[78%] ${flip ? '' : 'md:ml-auto'}`} />
-            <img src={portrait} alt="" width="900" height="1200" loading="lazy" class={`reveal mt-6 w-1/2 md:absolute md:-bottom-24 md:mt-0 md:w-[34%] ${flip ? 'md:right-0' : 'md:left-0'}`} />
+            <Photo src={c.land} alt={c.landAlt} ratio="landscape" sizes="(min-width: 768px) 50vw, 90vw" class={`reveal w-full md:w-[78%] ${flip ? '' : 'md:ml-auto'}`} />
+            <Photo src={c.port} alt={c.portAlt} ratio="portrait" sizes="(min-width: 768px) 25vw, 45vw" class={`reveal mt-6 w-1/2 md:absolute md:-bottom-24 md:mt-0 md:w-[34%] ${flip ? 'md:right-0' : 'md:left-0'}`} />
           </div>
         </div>
       </section>
@@ -75,7 +86,7 @@ const chapters = [
 
   <section class="mt-16 bg-off-white py-16 md:mt-28 md:py-28">
     <div class="mx-auto grid w-[88%] max-w-6xl items-center gap-10 md:w-4/5 md:grid-cols-2">
-      <img src={roomCard} alt="[Guest room: to shoot]" width="1200" height="990" loading="lazy" class="reveal w-full" />
+      <Photo src={roomQueen} alt="A queen room with bedside lamps and a writing desk" ratio="card" class="reveal w-full" />
       <div class="reveal">
         <p class="label">Rooms and suites</p>
         <h2 class="mt-4">59 rooms across two floors</h2>
