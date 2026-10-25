@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import { BOOKING_URL, HOTEL_PAGE_URL } from '../config/booking';
+---
+<Base
+  title="Book now | Mercure Maitland Monte Pio"
+  description="Book your stay at Mercure Maitland Monte Pio through ALL Accor."
+>
+  <section class="mx-auto w-[88%] max-w-xl py-24 text-center md:py-36">
+    <h1 class="reveal">Book your stay</h1>
+    <p class="reveal mt-6">
+      Bookings are made through ALL Accor, where you can check dates, rates and room types in one place.
+    </p>
+    <div class="reveal mt-10 flex flex-col items-center gap-4">
+      <a href={BOOKING_URL} class="btn" rel="noopener">Check dates and rates</a>
+      <a href={HOTEL_PAGE_URL} class="link text-sm" rel="noopener">View our Accor hotel page</a>
+    </div>
+  </section>
+</Base>

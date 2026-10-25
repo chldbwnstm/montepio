@@ -1,0 +1,90 @@
+---
+import Base from '../layouts/Base.astro';
+import { BOOKING_URL } from '../config/booking';
+// shortcut: plain <img> for SVG placeholders, swap to astro:assets <Image> when real photos arrive
+import portrait from '../assets/photos/portrait.svg?url';
+import landscape from '../assets/photos/landscape.svg?url';
+import roomCard from '../assets/photos/room-card.svg?url';
+import ilMorning from '../assets/illustrations/home-morning.svg?url';
+import ilMaitland from '../assets/illustrations/home-maitland.svg?url';
+import ilArt from '../assets/illustrations/home-art.svg?url';
+import ilMonte from '../assets/illustrations/home-monte.svg?url';
+import ilNight from '../assets/illustrations/home-night.svg?url';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const chapters = [
+  {
+    title: 'Morning in the building',
+    copy: 'Light finds its way in slowly here. Start with coffee and something warm [breakfast offer: confirm], then take a minute with the walls around you. [Heritage story: confirm with owners]',
+    alt: '[Morning light in the building: to shoot]',
+    il: ilMorning,
+  },
+  {
+    title: 'Wander Maitland',
+    copy: 'Step outside and the town is yours. Browse, stop for a long lunch, follow the river for a while. Ask us for the places we keep going back to. [Local favourites and walking times: confirm]',
+    alt: '[Maitland street scene: to shoot]',
+    il: ilMaitland,
+  },
+  {
+    title: 'An afternoon in',
+    copy: 'Every room holds an original work by Cory Hartono, made for this building. Look closely and you may spot the river, the hills, or a bridge you crossed this morning. [Which work hangs in which room: confirm]',
+    alt: '[Room with Cory Hartono artwork in place: to shoot]',
+    il: ilArt,
+  },
+  {
+    title: 'Evening at Monte',
+    copy: 'Monte is our restaurant. Book a table for dinner, or simply come by for a glass before bed. [Cuisine, hours and bookings: confirm]',
+    alt: '[Monte dining room in service: to shoot]',
+    il: ilMonte,
+  },
+  {
+    title: 'Goodnight',
+    copy: 'Draw the curtains and turn the lights down low. Tomorrow can wait until check-out at [check-out time: confirm].',
+    alt: '[Room at night, lamps on: to shoot]',
+    il: ilNight,
+  },
+];
+---
+<Base
+  title="Mercure Maitland Monte Pio | Boutique heritage hotel in Maitland, NSW"
+  description="A boutique heritage hotel in the restored Monte Pio building in Maitland, in the Hunter Valley. Home to Monte restaurant."
+>
+  <section class="flex min-h-[70vh] items-center justify-center px-6 text-center">
+    <h1 class="reveal max-w-md italic">Stay a while in Maitland.</h1>
+  </section>
+
+  {chapters.map((c, i) => {
+    const flip = i % 2 === 1;
+    return (
+      <section class="mx-auto w-[88%] max-w-6xl py-16 md:w-4/5 md:py-28">
+        <div class={`grid items-start gap-10 md:grid-cols-12 md:gap-8 ${flip ? 'md:[direction:rtl]' : ''}`}>
+          <div class="reveal md:col-span-4 md:pt-16 [direction:ltr]">
+            <h2 class="hairline-heading">{c.title}</h2>
+            <p class="mt-6 max-w-[300px]">{c.copy}</p>
+            <img src={c.il} alt="" width="600" height="600" loading="lazy" class="mt-10 hidden w-40 md:block" />
+          </div>
+          <div class="relative md:col-span-8 [direction:ltr]">
+            <img src={landscape} alt={c.alt} width="1200" height="800" loading="lazy" class={`reveal w-full md:w-[78%] ${flip ? '' : 'md:ml-auto'}`} />
+            <img src={portrait} alt="" width="900" height="1200" loading="lazy" class={`reveal mt-6 w-1/2 md:absolute md:-bottom-24 md:mt-0 md:w-[34%] ${flip ? 'md:right-0' : 'md:left-0'}`} />
+          </div>
+        </div>
+      </section>
+    );
+  })}
+
+  <section class="mt-16 bg-off-white py-16 md:mt-28 md:py-28">
+    <div class="mx-auto grid w-[88%] max-w-6xl items-center gap-10 md:w-4/5 md:grid-cols-2">
+      <img src={roomCard} alt="[Guest room: to shoot]" width="1200" height="990" loading="lazy" class="reveal w-full" />
+      <div class="reveal">
+        <p class="label">Rooms and suites</p>
+        <h2 class="mt-4">59 rooms across two floors</h2>
+        <p class="mt-6 max-w-[300px]">Each one with its own Cory Hartono artwork. [Room types and details: confirm]</p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href={BOOKING_URL} class="btn" rel="noopener">View rooms and rates</a>
+          <a href={`${base}/book`} class="link self-center text-sm">How booking works</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

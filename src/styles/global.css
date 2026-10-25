@@ -1,0 +1,66 @@
+@import 'tailwindcss';
+@import '@fontsource/newsreader/300.css';
+@import '@fontsource/newsreader/300-italic.css';
+@import '@fontsource/jost/300.css';
+@import '@fontsource/jost/400.css';
+
+@theme {
+  --color-white: #ffffff;
+  --color-off-white: #f4f4f2;
+  --color-ink: #222223;
+  --color-gold: #b88b5f;
+  --color-gold-hover: #c7996c;
+  /* #B88B5F is 3:1 on white: fine for 24px+ headings, fails AA for small text and white-on-gold buttons */
+  --color-gold-text: #8c6a47;
+  --color-gold-text-hover: #75573a;
+  --color-peach: #efd1bc;
+  --color-hairline: #dddddd;
+  --color-muted: #61616c;
+
+  --color-art-pink: #df9d7f;
+  --color-art-river: #92b0b4;
+  --color-art-olive: #4c4e35;
+  --color-art-ochre: #a87f52;
+  --color-art-sand: #d6bda3;
+
+  --color-monte-accent: #a65a3f;
+  --color-monte-olive: #4c4e35;
+  --color-monte-night: #2b2420;
+
+  --font-serif: 'Newsreader', Georgia, serif;
+  --font-sans: 'Jost', Helvetica, Arial, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-white font-sans text-base font-light leading-relaxed text-ink;
+  }
+  h1, h2 {
+    @apply font-serif font-light leading-tight text-gold;
+    font-size: 24px;
+  }
+  @media (min-width: 768px) { h1, h2 { font-size: 26px; } }
+  @media (min-width: 1200px) { h1, h2 { font-size: 30px; } }
+  :focus-visible { outline: 1px solid var(--color-gold-text); outline-offset: 3px; }
+}
+
+@layer components {
+  .label { @apply text-[15px] font-normal uppercase tracking-[0.15em] text-gold-text; }
+  .btn {
+    @apply inline-block bg-gold-text px-8 py-2 text-xs font-normal uppercase tracking-[1.2px] text-white transition-colors duration-200 hover:bg-gold-text-hover;
+  }
+  .btn-inverse { @apply bg-white text-gold-text hover:bg-off-white; }
+  .link { @apply text-gold-text underline decoration-1 underline-offset-4 transition-colors duration-200 hover:text-gold-text-hover; }
+  .hairline-heading { @apply flex items-center gap-5; }
+  .hairline-heading::after { content: ''; @apply h-px flex-1 bg-hairline; }
+}
+
+/* Hidden only when JS runs, so content stays readable without it */
+.js .reveal { opacity: 0; transform: translateY(60px); }
+.js .reveal.in {
+  opacity: 1; transform: none;
+  transition: opacity 1.2s ease-out 0.2s, transform 1.2s ease-out 0.2s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+}
