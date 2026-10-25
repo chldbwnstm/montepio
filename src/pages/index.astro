@@ -2,8 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Photo from '../components/Photo.astro';
 import { BOOKING_URL } from '../config/booking';
-import portrait from '../assets/photos/portrait.svg?url';
-// shortcut: pre-renovation photos from the Accor listing (A0C4), confirm usage rights with Accor before public launch and replace after the shoot
+// shortcut: pre-renovation Accor photos; confirm rights and replace after the commissioned shoot before public launch.
 import facade from '../assets/photos/facade.jpg';
 import grounds from '../assets/photos/grounds.jpg';
 import barDining from '../assets/photos/bar-dining.jpg';
@@ -11,49 +10,48 @@ import roomArch from '../assets/photos/room-arch.jpg';
 import roomQueen from '../assets/photos/room-queen.jpg';
 import roomTwin from '../assets/photos/room-twin.jpg';
 import roomSpa from '../assets/photos/room-spa.jpg';
-import ilMorning from '../assets/illustrations/home-morning.svg?url';
-import ilMaitland from '../assets/illustrations/home-maitland.svg?url';
-import ilArt from '../assets/illustrations/home-art.svg?url';
-import ilMonte from '../assets/illustrations/home-monte.svg?url';
-import ilNight from '../assets/illustrations/home-night.svg?url';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-
 const chapters = [
   {
-    title: 'Morning in the building',
-    copy: 'Light finds its way in slowly here. Start with coffee and something warm [breakfast offer: confirm], then take a minute with the walls around you. [Heritage story: confirm with owners]',
+    id: 'hotel', name: 'The hotel', moment: 'A slow beginning', title: 'Morning,\nat Monte Pio.',
+    copy: 'The light on the brickwork. A quiet moment before the day begins. Settle into a different pace, here in our little corner of Maitland.',
+    notes: '[Breakfast offer: confirm] [Heritage story: confirm with owners]',
+    shot: '[Morning coffee: to shoot]', illustration: '[Entrance illustration: to commission]',
     land: facade, landAlt: 'The red brick Monte Pio building and front lawn',
-    port: portrait, portAlt: '[Morning coffee: to shoot]',
-    il: ilMorning,
+    port: grounds, portAlt: 'Pines and gardens beside Monte Pio', caption: 'A heritage address in Maitland',
   },
   {
-    title: 'Wander Maitland',
-    copy: 'Step outside and the town is yours. Browse, stop for a long lunch, follow the river for a while. Ask us for the places we keep going back to. [Local favourites and walking times: confirm]',
-    land: grounds, landAlt: 'Tall pines on the lawn beside the brick buildings',
-    port: portrait, portAlt: '[Maitland street scene: to shoot]',
-    il: ilMaitland,
+    id: 'maitland', name: 'The neighbourhood', moment: 'A little exploring', title: 'Take the\nlong way back.',
+    copy: 'An unhurried wander. A pause by the river. Maitland and the Hunter Valley invite you to leave a little space in the day for something unexpected.',
+    notes: '[Local favourites and walking times: confirm]',
+    shot: '[Maitland street scene: to shoot]', illustration: '[Maitland illustration: to commission]',
+    land: grounds, landAlt: 'Tall pines on the lawn beside the hotel buildings',
+    port: facade, portAlt: 'A closer crop of the hotel’s heritage brick facade', caption: 'Begin here. See where the day takes you.',
   },
   {
-    title: 'An afternoon in',
-    copy: 'Every room holds an original work by Cory Hartono, made for this building. Look closely and you may spot the river, the hills, or a bridge you crossed this morning. [Which work hangs in which room: confirm]',
-    land: roomArch, landAlt: 'A guest room with an arched opening and a sitting area',
-    port: roomTwin, portAlt: 'A twin room with an artwork above the beds',
-    il: ilArt,
+    id: 'collection', name: 'The collection', moment: 'An afternoon in', title: 'A room with\na local point of view.',
+    copy: 'The river, the hills, a familiar bridge. Six works by Cory Hartono bring a little of the region indoors, as part of Monte Pio’s next chapter.',
+    notes: '[Which work hangs in which room: confirm]',
+    shot: '[Cory Hartono artwork photography and reproduction permission: confirm]', illustration: '[Art illustration: to commission]',
+    land: roomArch, landAlt: 'An existing guest room with an arched opening and a sitting area',
+    port: roomTwin, portAlt: 'An existing twin room before the renovation', caption: 'Space to settle in',
   },
   {
-    title: 'Evening at Monte',
-    copy: 'Monte is our restaurant. Book a table for dinner, or simply come by for a glass before bed. [Cuisine, hours and bookings: confirm]',
-    land: barDining, landAlt: 'The bar lounge opening onto the dining room',
-    port: portrait, portAlt: '[Monte dish: to shoot]',
-    il: ilMonte,
+    id: 'monte', name: 'At the table', moment: 'When evening comes', title: 'Stay for\none more.',
+    copy: 'A table at Monte. Good company, a conversation that carries on. Our restaurant is part of the story, with a new chapter still taking shape.',
+    notes: '[Cuisine, hours and bookings: confirm]',
+    shot: '[Monte dish: to shoot]', illustration: '[Monte still-life illustration: to commission]',
+    land: barDining, landAlt: 'The existing bar lounge opening onto the dining room',
+    port: barDining, portAlt: 'A detail of the existing bar and lounge', caption: 'Monte, at Mercure Maitland Monte Pio',
   },
   {
-    title: 'Goodnight',
-    copy: 'Draw the curtains and turn the lights down low. Tomorrow can wait until check-out at [check-out time: confirm].',
-    land: roomSpa, landAlt: 'A suite with a spa bath and lamps lit',
-    port: portrait, portAlt: '[Building at dusk: to shoot]',
-    il: ilNight,
+    id: 'night', name: 'And so to bed', moment: 'The day, well spent', title: 'Nothing more\non the agenda.',
+    copy: 'Draw the curtains. Find your page. Let the evening become a quiet night, and leave a little of Maitland for tomorrow.',
+    notes: '[Check-out time: confirm]',
+    shot: '[Building at dusk: to shoot]', illustration: '[Night illustration: to commission]',
+    land: roomSpa, landAlt: 'An existing suite with a spa bath and bedside lamps',
+    port: roomQueen, portAlt: 'An existing queen room with a bedside lamp and writing desk', caption: 'Make yourself at home',
   },
 ];
 ---
@@ -61,40 +59,61 @@ const chapters = [
   title="Mercure Maitland Monte Pio | Boutique heritage hotel in Maitland, NSW"
   description="A boutique heritage hotel in the restored Monte Pio building in Maitland, in the Hunter Valley. Home to Monte restaurant."
 >
-  <section class="flex min-h-[70vh] items-center justify-center px-6 text-center">
-    <h1 class="reveal max-w-3xl italic">Stay a while in Maitland.</h1>
+  <section class="opening site-container" aria-labelledby="welcome">
+    <p class="eyebrow">Maitland, New South Wales · Hunter Valley</p>
+    <h1 id="welcome">Stay a while.<br /><em>Feel a world away.</em></h1>
+    <p class="opening-copy">A heritage setting. A slower pace.<br />A little time to call your own.</p>
+    <a class="text-link opening-link" href="#hotel">A day at Monte Pio <span aria-hidden="true">↓</span></a>
   </section>
 
-  {chapters.map((c, i) => {
-    const flip = i % 2 === 1;
-    return (
-      <section class="mx-auto w-[88%] max-w-6xl py-16 md:w-4/5 md:py-28">
-        <div class={`grid items-start gap-10 md:grid-cols-12 md:gap-8 ${flip ? 'md:[direction:rtl]' : ''}`}>
-          <div class="reveal md:col-span-4 md:pt-16 [direction:ltr]">
-            <h2 class="hairline-heading">{c.title}</h2>
-            <p class="mt-6 max-w-[300px]">{c.copy}</p>
-            <img src={c.il} alt="" width="600" height="600" loading="lazy" class="mt-10 hidden w-40 md:block" />
-          </div>
-          <div class="relative md:col-span-8 [direction:ltr]">
-            <Photo src={c.land} alt={c.landAlt} ratio="landscape" sizes="(min-width: 768px) 50vw, 90vw" class={`reveal w-full md:w-[78%] ${flip ? '' : 'md:ml-auto'}`} />
-            <Photo src={c.port} alt={c.portAlt} ratio="portrait" sizes="(min-width: 768px) 25vw, 45vw" class={`reveal mt-6 w-1/2 md:absolute md:-bottom-24 md:mt-0 md:w-[34%] ${flip ? 'md:right-0' : 'md:left-0'}`} />
-          </div>
-        </div>
-      </section>
-    );
-  })}
+  <div class="chapter-index site-container">
+    <span class="eyebrow">The art of staying a little longer</span>
+    <span class="chapter-index-note">Five moments, at your own pace</span>
+  </div>
 
-  <section class="mt-16 bg-off-white py-16 md:mt-28 md:py-28">
-    <div class="mx-auto grid w-[88%] max-w-6xl items-center gap-10 md:w-4/5 md:grid-cols-2">
-      <Photo src={roomQueen} alt="A queen room with bedside lamps and a writing desk" ratio="card" class="reveal w-full" />
-      <div class="reveal">
-        <p class="label">Rooms and suites</p>
-        <h2 class="mt-4">59 rooms across two floors</h2>
-        <p class="mt-6 max-w-[300px]">Each one with its own Cory Hartono artwork. [Room types and details: confirm]</p>
-        <div class="mt-8 flex flex-wrap gap-4">
-          <a href={BOOKING_URL} class="btn" rel="noopener">View rooms and rates</a>
-          <a href={`${base}/book`} class="link self-center text-sm">How booking works</a>
+  {chapters.map((chapter, index) => (
+    <section id={chapter.id} class={`chapter chapter--${chapter.id}`} aria-labelledby={`${chapter.id}-title`}>
+      <div class="chapter-layout site-container">
+        <div class="chapter-copy reveal">
+          <p class="chapter-kicker"><span class="chapter-number">0{index + 1}</span><span class="eyebrow">{chapter.moment}</span></p>
+          <h2 id={`${chapter.id}-title`}>{chapter.title}</h2>
+          <p class="chapter-description">{chapter.copy}</p>
+          <a class="text-link" href={index < chapters.length - 1 ? `#${chapters[index + 1].id}` : '#rooms'}>
+            {index < chapters.length - 1 ? 'Let the day unfold' : 'Find your stay'} <span aria-hidden="true">↗</span>
+          </a>
+          <div class="chapter-notes">
+            <p>{chapter.notes}</p>
+            <p>{chapter.shot}</p>
+            <p>{chapter.illustration}</p>
+          </div>
         </div>
+        <figure class="chapter-images">
+          <div class="chapter-main reveal">
+            <Photo src={chapter.land} alt={chapter.landAlt} ratio={index === 2 ? 'portrait' : 'landscape'} sizes="(min-width: 1000px) 46vw, (min-width: 700px) 55vw, 88vw" priority={index === 0} />
+          </div>
+          <div class="chapter-detail reveal">
+            <Photo src={chapter.port} alt={chapter.portAlt} ratio={index === 2 ? 'landscape' : 'portrait'} sizes="(min-width: 700px) 22vw, 43vw" />
+          </div>
+          <span class="chapter-side-label" aria-hidden="true">{chapter.name} / Monte Pio</span>
+          <figcaption class="chapter-caption"><span>{chapter.caption}</span><span aria-hidden="true">0{index + 1} / 05</span></figcaption>
+        </figure>
+      </div>
+    </section>
+  ))}
+
+  <section id="rooms" class="rooms-section" aria-labelledby="rooms-title">
+    <div class="rooms-layout site-container">
+      <figure class="rooms-image reveal">
+        <Photo src={roomQueen} alt="An existing queen room with bedside lamps and a writing desk" ratio="card" sizes="(min-width: 700px) 45vw, 88vw" />
+        <figcaption>Rooms at Monte Pio</figcaption>
+      </figure>
+      <div class="rooms-copy reveal">
+        <p class="eyebrow">Rooms &amp; suites</p>
+        <h2 id="rooms-title">A place to pause.<br /><em>A room to make yours.</em></h2>
+        <p>59 rooms across two floors. A heritage setting, a collection of local art, and time to enjoy it all.</p>
+        <p class="editor-note">[Room types and details: confirm]</p>
+        <a href={BOOKING_URL} class="btn" rel="noopener">Find your stay <span aria-hidden="true">↗</span></a>
+        <a href={`${base}/book`} class="text-link">About your booking <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>

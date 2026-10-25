@@ -1,19 +1,19 @@
 ---
 import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import grounds from '../assets/photos/grounds.jpg';
 import { BOOKING_URL, HOTEL_PAGE_URL } from '../config/booking';
 ---
-<Base
-  title="Book now | Mercure Maitland Monte Pio"
-  description="Book your stay at Mercure Maitland Monte Pio through ALL Accor."
->
-  <section class="mx-auto w-[88%] max-w-xl py-24 text-center md:py-36">
-    <h1 class="reveal">Book your stay</h1>
-    <p class="reveal mt-6">
-      Bookings are made through ALL Accor, where you can check dates, rates and room types in one place.
-    </p>
-    <div class="reveal mt-10 flex flex-col items-center gap-4">
-      <a href={BOOKING_URL} class="btn" rel="noopener">Check dates and rates</a>
-      <a href={HOTEL_PAGE_URL} class="link text-sm" rel="noopener">View our Accor hotel page</a>
+<Base title="Book your stay | Mercure Maitland Monte Pio" description="Book your stay at Mercure Maitland Monte Pio through ALL Accor.">
+  <section class="booking-section site-container">
+    <div class="booking-copy">
+      <p class="eyebrow">Your time at Monte Pio</p>
+      <h1>A little escape,<br /><em>just a few clicks away.</em></h1>
+      <p>Make room for a slower pace. Check dates, explore room types and book your stay with us through ALL Accor.</p>
+      <a href={BOOKING_URL} class="btn" rel="noopener">Check dates &amp; rates <span aria-hidden="true">↗</span></a>
+      <p class="booking-note">You’ll continue to ALL Accor to complete your booking.</p>
+      <a href={HOTEL_PAGE_URL} class="text-link" rel="noopener">Our Accor hotel page <span aria-hidden="true">↗</span></a>
     </div>
+    <figure class="booking-image"><Photo src={grounds} alt="The gardens and heritage buildings of Monte Pio" ratio="portrait" priority sizes="(min-width: 700px) 40vw, 88vw" /><figcaption>A change of pace, in Maitland</figcaption></figure>
   </section>
 </Base>
